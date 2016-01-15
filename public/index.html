@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Technopedia</title>
+	<script src="/js/main.js"></script>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div ng-controller="MainController as main">
+		<ul>
+			<li ng-repeat="item in main.all">
+				<ul>
+					<h1>{{ item.word }}</h1>
+					<p>{{ item.def }}</p>
+					<p>{{ item.analogy }}</p>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<footer>
+		Made with ♥ in London, UK.
+	</footer>
+</body>
+</html>
