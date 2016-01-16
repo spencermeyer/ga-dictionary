@@ -1,0 +1,19 @@
+{
+  "name": "technopedia",
+  "description": "A dictionary of tech terms.",
+  "main": "index.js",
+  "authors": [
+    "Alex Chin <alex@alexchin.co.uk> (http://www.alexchin.co.uk/)"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/alexpchin/technopedia",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
