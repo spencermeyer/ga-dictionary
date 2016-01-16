@@ -7,7 +7,6 @@ var browserify     = require('browserify');
 var source         = require('vinyl-source-stream');
 var mainBowerFiles = require('main-bower-files');
 var exists         = require('path-exists').sync;
-
 var flatten        = require('gulp-flatten');
 var gulpFilter     = require('gulp-filter');
 var uglify         = require('gulp-uglify');
@@ -42,14 +41,13 @@ gulp.task('bower-old', function() {
 
 // grab libraries files from bower_components, minify and push in /public
 gulp.task('bower', function() {
-  var jsFilter   = gulpFilter('*.js', {restore: true});
-  var cssFilter  = gulpFilter('*.css', {restore: true});
-  var fontFilter = gulpFilter(['*.eot', '*.woff', '*.svg', '*.ttf'], {restore: true});
-	var dest_path  = "./public";
+  var jsFilter   = gulpFilter('*.js', { restore: true });
+  var scssFilter  = gulpFilter('*.scss', { restore: true });
+  var cssFilter  = gulpFilter('*.css', { restore: true });
+  var fontFilter = gulpFilter(['*.eot', '*.woff', '*.svg', '*.ttf'], { restore: true });
+	var dest_path  = "./assets";
 
-  return gulp.src(mainBowerFiles(), {
-		base: 'bower_components'
-	})
+  return gulp.src(mainBowerFiles())
 
   // grab vendor js files from bower_components, minify and push in /public
   .pipe(jsFilter)
@@ -60,6 +58,11 @@ gulp.task('bower', function() {
   }))
   .pipe(gulp.dest(dest_path + '/js/'))
   .pipe(jsFilter.restore)
+
+	// grab vendor css files from bower_components, minify and push in /public
+	.pipe(scssFilter)
+	.pipe(gulp.dest(dest_path + '/scss'))
+	.pipe(cssFilter.restore)
 
   // grab vendor css files from bower_components, minify and push in /public
   .pipe(cssFilter)
@@ -89,7 +92,7 @@ gulp.task('browserify', function() {
 });
 
 gulp.task('sass', function() {
-	return sass('scss/style.scss')
+	return sass('./assets/scss/style.scss')
 	.pipe(gulp.dest('public/css'));
 });
 
@@ -108,7 +111,7 @@ gulp.task('yaml', function() {
 
 gulp.task('watch', function() {
 	gulp.watch('app/**/*.js', ['browserify']);
-	gulp.watch('scss/style.scss', ['sass']);
+	gulp.watch('./assets/scss/style.scss', ['sass']);
 	gulp.watch('data/*.yml', ['yaml', 'browserify']);
 	gulp.watch('bower_components/**', ['bower']);
 });
