@@ -6,21 +6,76 @@ var yaml           = require('gulp-yaml');
 var browserify     = require('browserify');
 var source         = require('vinyl-source-stream');
 var mainBowerFiles = require('main-bower-files');
+var exists         = require('path-exists').sync;
+
+var flatten        = require('gulp-flatten');
+var gulpFilter     = require('gulp-filter');
+var uglify         = require('gulp-uglify');
+var minifycss      = require('gulp-minify-css');
+var rename         = require('gulp-rename');
 
 gulp.task('connect', function () {
+	// Serve the public website from localhost:4000
 	connect.server({
 		root: 'public',
 		port: 4000
 	});
 });
 
+gulp.task('bower-old', function() {
+	// Replace main files by their minified version when possible
+	// var bowerWithMin = mainBowerFiles().map(function(path, index, arr) {
+	//   var newPath = path.replace(/.([^.]+)$/g, '.min.$1');
+	//   return exists(newPath) ? newPath : path;
+	// });
+
+	// mainBowerFiles is used as a src for the task
+	// Note: passing { base: ‘bower_components’ } as a second argument to the gulp.src() is required.
+	// https://medium.com/@wizardzloy/customizing-bootstrap-with-gulp-js-and-bower-fafac8e3e1af#.ovqu7fv8q
+	// return gulp.src(bowerWithMin, {
+	return gulp.src(mainBowerFiles(), {
+		base: 'bower_components'
+	})
+	// Then pipe it to wanted directory
+	.pipe(gulp.dest('./public/vendor'));
+});
+
+// grab libraries files from bower_components, minify and push in /public
 gulp.task('bower', function() {
-	// mainBowerFiles is used as a src for the task,
-  // usually you pipe stuff through a task
-  return gulp.src(mainBowerFiles())
-    // Then pipe it to wanted directory, I use
-    // dist/lib but it could be anything really
-    .pipe(gulp.dest('./public/vendor'));
+  var jsFilter   = gulpFilter('*.js', {restore: true});
+  var cssFilter  = gulpFilter('*.css', {restore: true});
+  var fontFilter = gulpFilter(['*.eot', '*.woff', '*.svg', '*.ttf'], {restore: true});
+	var dest_path  = "./public";
+
+  return gulp.src(mainBowerFiles(), {
+		base: 'bower_components'
+	})
+
+  // grab vendor js files from bower_components, minify and push in /public
+  .pipe(jsFilter)
+  .pipe(gulp.dest(dest_path + '/js/'))
+  .pipe(uglify())
+  .pipe(rename({
+    suffix: ".min"
+  }))
+  .pipe(gulp.dest(dest_path + '/js/'))
+  .pipe(jsFilter.restore)
+
+  // grab vendor css files from bower_components, minify and push in /public
+  .pipe(cssFilter)
+  .pipe(gulp.dest(dest_path + '/css'))
+  .pipe(minifycss())
+  .pipe(rename({
+      suffix: ".min"
+  }))
+  .pipe(gulp.dest(dest_path + '/css'))
+  .pipe(cssFilter.restore)
+
+  // grab vendor font files from bower_components and push in /public
+  .pipe(fontFilter)
+  .pipe(flatten())
+  .pipe(gulp.dest(dest_path + '/fonts'))
+	.pipe(fontFilter.restore);
 });
 
 gulp.task('browserify', function() {
@@ -39,16 +94,16 @@ gulp.task('sass', function() {
 });
 
 gulp.task('yaml', function() {
-  return gulp.src('./data/*.yml')
-		// convert the yaml to json
-    .pipe(yaml())
-		// output to terminal
-		.on('data', function(file) {
-			 gutil.log('The converted file from YAML to JSON is: ' + gutil.colors.bgYellow.bold.black(file.contents));
-			 gutil.log(gutil.colors.yellow('*** The file has also been written to ./output directory ****'));
-		 })
-		// save to the data directory
-    .pipe(gulp.dest('./data/'));
+	return gulp.src('./data/*.yml')
+	// convert the yaml to json
+	.pipe(yaml())
+	// output to terminal
+	.on('data', function(file) {
+		gutil.log('The converted file from YAML to JSON is: ' + gutil.colors.bgYellow.bold.black(file.contents));
+		gutil.log(gutil.colors.yellow('*** The file has also been written to ./output directory ****'));
+	})
+	// save to the data directory
+	.pipe(gulp.dest('./data/'));
 });
 
 gulp.task('watch', function() {
