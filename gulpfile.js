@@ -6,7 +6,6 @@ var yaml           = require('gulp-yaml');
 var browserify     = require('browserify');
 var source         = require('vinyl-source-stream');
 var mainBowerFiles = require('main-bower-files');
-var exists         = require('path-exists').sync;
 var flatten        = require('gulp-flatten');
 var gulpFilter     = require('gulp-filter');
 var uglify         = require('gulp-uglify');
@@ -21,28 +20,10 @@ gulp.task('connect', function () {
 	});
 });
 
-gulp.task('bower-old', function() {
-	// Replace main files by their minified version when possible
-	// var bowerWithMin = mainBowerFiles().map(function(path, index, arr) {
-	//   var newPath = path.replace(/.([^.]+)$/g, '.min.$1');
-	//   return exists(newPath) ? newPath : path;
-	// });
-
-	// mainBowerFiles is used as a src for the task
-	// Note: passing { base: ‘bower_components’ } as a second argument to the gulp.src() is required.
-	// https://medium.com/@wizardzloy/customizing-bootstrap-with-gulp-js-and-bower-fafac8e3e1af#.ovqu7fv8q
-	// return gulp.src(bowerWithMin, {
-	return gulp.src(mainBowerFiles(), {
-		base: 'bower_components'
-	})
-	// Then pipe it to wanted directory
-	.pipe(gulp.dest('./public/vendor'));
-});
-
 // grab libraries files from bower_components, minify and push in /public
 gulp.task('bower', function() {
   var jsFilter   = gulpFilter('*.js', { restore: true });
-  var scssFilter  = gulpFilter('*.scss', { restore: true });
+  var scssFilter = gulpFilter('*.scss', { restore: true });
   var cssFilter  = gulpFilter('*.css', { restore: true });
   var fontFilter = gulpFilter(['*.eot', '*.woff', '*.svg', '*.ttf'], { restore: true });
 	var dest_path  = "./assets";
