@@ -2,6 +2,9 @@
   def: A front-end framework created by Misko Hevery and Adam Abrons.
   analogy: Angular is like the tv screen.
 
+- word: Array
+  def: An ordered collection of objects.
+
 - word: Node
   def: Server-side Javascript
   analogy: Javascript

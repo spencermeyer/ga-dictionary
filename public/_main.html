@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for..." ng-model="query">
+        <input type="text" class="form-control" placeholder="Search {{ main.all.length }} tech definitions" ng-model="main.query" value="main.query">
         <span class="input-group-btn">
           <button class="btn btn-secondary" type="button">Go!</button>
         </span>
@@ -10,13 +10,15 @@
     </div>
   </div>
 
+  <ul class="filter">
+    <li ng-repeat="letter in main.letters">
+      <a href="#" ng-click="main.sort(letter)">{{ letter | uppercase }}</a>
+    </li>
+  </ul>
+
   <ul class="results">
-    <li ng-repeat="item in main.all | filter:query | orderBy: 'word'">
-      <ul>
-        <h1>{{ item.word }}</h1>
-        <p>{{ item.def }}</p>
-        <p>{{ item.analogy }}</p>
-      </ul>
+    <li ng-repeat="item in main.all | startsWithLetter:main.query">
+      <h2><a href="#" ng-click="main.define(item)">{{ item.word }}</a></h2>
     </li>
   </ul>
 </main>

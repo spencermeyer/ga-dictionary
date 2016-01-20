@@ -1,23 +1,61 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 require('angular');
-var MainController = require('./controllers/MainController');
+
+// To improve to be more programatical later!
+var MainController   = require('./controllers/MainController');
+var StartsWithFilter = require('./filters/startsWith');
 
 angular.module('app', []);
 
 angular
   .module('app')
-  .controller('MainController', MainController);
+  .controller('MainController', MainController)
+  .filter('startsWithLetter', StartsWithFilter);
 
-},{"./controllers/MainController":2,"angular":5}],2:[function(require,module,exports){
+},{"./controllers/MainController":2,"./filters/startsWith":3,"angular":6}],2:[function(require,module,exports){
 var dictionary = require("../../data/dictionary");
 
 module.exports = function() {
-	this.all = dictionary;
+	var self      = this;
+	self.query    = null;
+	self.all      = dictionary;
+	self.letters  = 'abcdefghijklmnopqrstuvwxyz'.split('');
+	self.selected = {};
+
+	self.sort = function(query) {
+		event.preventDefault();
+		self.query = query;
+	};
+
+	self.define = function(item) {
+		event.preventDefault();
+		self.selected = item;
+	};
 };
 
-},{"../../data/dictionary":3}],3:[function(require,module,exports){
-module.exports=[{"word":"Angular","def":"A front-end framework created by Misko Hevery and Adam Abrons.","analogy":"Angular is like the tv screen."},{"word":"Node","def":"Server-side Javascript","analogy":"Javascript"},{"word":"Express"}]
+},{"../../data/dictionary":4}],3:[function(require,module,exports){
+function stringStartsWith(string, prefix) {
+  return string.toLowerCase().slice(0, prefix.length) == prefix.toLowerCase();
+}
+
+module.exports = function () {
+  return function(items, letters) {
+    if (letters === null) return false;
+    var filtered = [];
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      console.log(item.word);
+      console.log(letters);
+      if (stringStartsWith(item.word, letters)) filtered.push(item);
+    }
+    console.log(filtered);
+    return filtered;
+  };
+};
+
 },{}],4:[function(require,module,exports){
+module.exports=[{"word":"Angular","def":"A front-end framework created by Misko Hevery and Adam Abrons.","analogy":"Angular is like the tv screen."},{"word":"Array","def":"An ordered collection of objects."},{"word":"Node","def":"Server-side Javascript","analogy":"Javascript"},{"word":"Express"}]
+},{}],5:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -29036,8 +29074,8 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":4}]},{},[1]);
+},{"./angular":5}]},{},[1]);

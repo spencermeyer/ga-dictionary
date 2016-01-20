@@ -5,24 +5,62 @@ if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires j
 relatedTarget:this._element}),l=e.Event(h.SHOW,{relatedTarget:i});if(i&&e(i).trigger(a),e(this._element).trigger(l),!l.isDefaultPrevented()&&!a.isDefaultPrevented()){o&&(n=e(o)[0]),this._activate(this._element,r);var u=function(){var n=e.Event(h.HIDDEN,{relatedTarget:t._element}),r=e.Event(h.SHOWN,{relatedTarget:i});e(i).trigger(n),e(t._element).trigger(r)};n?this._activate(n,n.parentNode,u):u()}}}},{key:"dispose",value:function(){e.removeClass(this._element,o),this._element=null}},{key:"_activate",value:function(t,n,i){var r=e(n).find(f.ACTIVE_CHILD)[0],o=i&&s.supportsTransitionEnd()&&(r&&e(r).hasClass(d.FADE)||Boolean(e(n).find(f.FADE_CHILD)[0])),a=e.proxy(this._transitionComplete,this,t,r,o,i);r&&o?e(r).one(s.TRANSITION_END,a).emulateTransitionEnd(c):a(),r&&e(r).removeClass(d.IN)}},{key:"_transitionComplete",value:function(t,n,i,r){if(n){e(n).removeClass(d.ACTIVE);var o=e(n).find(f.DROPDOWN_ACTIVE_CHILD)[0];o&&e(o).removeClass(d.ACTIVE),n.setAttribute("aria-expanded",!1)}if(e(t).addClass(d.ACTIVE),t.setAttribute("aria-expanded",!0),i?(s.reflow(t),e(t).addClass(d.IN)):e(t).removeClass(d.FADE),t.parentNode&&e(t.parentNode).hasClass(d.DROPDOWN_MENU)){var a=e(t).closest(f.DROPDOWN)[0];a&&e(a).find(f.DROPDOWN_TOGGLE).addClass(d.ACTIVE),t.setAttribute("aria-expanded",!0)}r&&r()}}],[{key:"_jQueryInterface",value:function(n){return this.each(function(){var i=e(this),r=i.data(o);r||(r=r=new t(this),i.data(o,r)),"string"==typeof n&&r[n]()})}},{key:"VERSION",get:function(){return i}}]),t}();return e(document).on(h.CLICK_DATA_API,f.DATA_TOGGLE,function(t){t.preventDefault(),_._jQueryInterface.call(e(this),"show")}),e.fn[t]=_._jQueryInterface,e.fn[t].Constructor=_,e.fn[t].noConflict=function(){return e.fn[t]=u,_._jQueryInterface},_}(jQuery),function(e){var t="tooltip",i="4.0.0",o="bs.tooltip",a="."+o,l=e.fn[t],u=150,c="bs-tether",h={animation:!0,template:'<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',trigger:"hover focus",title:"",delay:0,html:!1,selector:!1,placement:"top",offset:"0 0",constraints:[]},d={animation:"boolean",template:"string",title:"(string|function)",trigger:"string",delay:"(number|object)",html:"boolean",selector:"(string|boolean)",placement:"(string|function)",offset:"string",constraints:"array"},f={TOP:"bottom center",RIGHT:"middle left",BOTTOM:"top center",LEFT:"middle right"},_={IN:"in",OUT:"out"},g={HIDE:"hide"+a,HIDDEN:"hidden"+a,SHOW:"show"+a,SHOWN:"shown"+a,INSERTED:"inserted"+a,CLICK:"click"+a,FOCUSIN:"focusin"+a,FOCUSOUT:"focusout"+a,MOUSEENTER:"mouseenter"+a,MOUSELEAVE:"mouseleave"+a},v={FADE:"fade",IN:"in"},m={TOOLTIP:".tooltip",TOOLTIP_INNER:".tooltip-inner"},E={element:!1,enabled:!1},p={HOVER:"hover",FOCUS:"focus",CLICK:"click",MANUAL:"manual"},T=function(){function l(e,t){n(this,l),this._isEnabled=!0,this._timeout=0,this._hoverState="",this._activeTrigger={},this._tether=null,this.element=e,this.config=this._getConfig(t),this.tip=null,this._setListeners()}return r(l,[{key:"enable",value:function(){this._isEnabled=!0}},{key:"disable",value:function(){this._isEnabled=!1}},{key:"toggleEnabled",value:function(){this._isEnabled=!this._isEnabled}},{key:"toggle",value:function(t){if(t){var n=this.constructor.DATA_KEY,i=e(t.currentTarget).data(n);i||(i=new this.constructor(t.currentTarget,this._getDelegateConfig()),e(t.currentTarget).data(n,i)),i._activeTrigger.click=!i._activeTrigger.click,i._isWithActiveTrigger()?i._enter(null,i):i._leave(null,i)}else{if(e(this.getTipElement()).hasClass(v.IN))return void this._leave(null,this);this._enter(null,this)}}},{key:"dispose",value:function(){clearTimeout(this._timeout),this.cleanupTether(),e.removeData(this.element,this.constructor.DATA_KEY),e(this.element).off(this.constructor.EVENT_KEY),this.tip&&e(this.tip).remove(),this._isEnabled=null,this._timeout=null,this._hoverState=null,this._activeTrigger=null,this._tether=null,this.element=null,this.config=null,this.tip=null}},{key:"show",value:function(){var t=this,n=e.Event(this.constructor.Event.SHOW);if(this.isWithContent()&&this._isEnabled){e(this.element).trigger(n);var i=e.contains(this.element.ownerDocument.documentElement,this.element);if(n.isDefaultPrevented()||!i)return;var r=this.getTipElement(),o=s.getUID(this.constructor.NAME);r.setAttribute("id",o),this.element.setAttribute("aria-describedby",o),this.setContent(),this.config.animation&&e(r).addClass(v.FADE);var a="function"==typeof this.config.placement?this.config.placement.call(this,r,this.element):this.config.placement,u=this._getAttachment(a);e(r).data(this.constructor.DATA_KEY,this).appendTo(document.body),e(this.element).trigger(this.constructor.Event.INSERTED),this._tether=new Tether({attachment:u,element:r,target:this.element,classes:E,classPrefix:c,offset:this.config.offset,constraints:this.config.constraints}),s.reflow(r),this._tether.position(),e(r).addClass(v.IN);var h=function(){var n=t._hoverState;t._hoverState=null,e(t.element).trigger(t.constructor.Event.SHOWN),n===_.OUT&&t._leave(null,t)};if(s.supportsTransitionEnd()&&e(this.tip).hasClass(v.FADE))return void e(this.tip).one(s.TRANSITION_END,h).emulateTransitionEnd(l._TRANSITION_DURATION);h()}}},{key:"hide",value:function(t){var n=this,i=this.getTipElement(),r=e.Event(this.constructor.Event.HIDE),o=function(){n._hoverState!==_.IN&&i.parentNode&&i.parentNode.removeChild(i),n.element.removeAttribute("aria-describedby"),e(n.element).trigger(n.constructor.Event.HIDDEN),n.cleanupTether(),t&&t()};e(this.element).trigger(r),r.isDefaultPrevented()||(e(i).removeClass(v.IN),s.supportsTransitionEnd()&&e(this.tip).hasClass(v.FADE)?e(i).one(s.TRANSITION_END,o).emulateTransitionEnd(u):o(),this._hoverState="")}},{key:"isWithContent",value:function(){return Boolean(this.getTitle())}},{key:"getTipElement",value:function(){return this.tip=this.tip||e(this.config.template)[0]}},{key:"setContent",value:function(){var t=this.getTipElement(),n=this.getTitle(),i=this.config.html?"innerHTML":"innerText";e(t).find(m.TOOLTIP_INNER)[0][i]=n,e(t).removeClass(v.FADE).removeClass(v.IN),this.cleanupTether()}},{key:"getTitle",value:function(){var e=this.element.getAttribute("data-original-title");return e||(e="function"==typeof this.config.title?this.config.title.call(this.element):this.config.title),e}},{key:"cleanupTether",value:function(){this._tether&&(this._tether.destroy(),e(this.element).removeClass(this._removeTetherClasses),e(this.tip).removeClass(this._removeTetherClasses))}},{key:"_getAttachment",value:function(e){return f[e.toUpperCase()]}},{key:"_setListeners",value:function(){var t=this,n=this.config.trigger.split(" ");n.forEach(function(n){if("click"===n)e(t.element).on(t.constructor.Event.CLICK,t.config.selector,e.proxy(t.toggle,t));else if(n!==p.MANUAL){var i=n===p.HOVER?t.constructor.Event.MOUSEENTER:t.constructor.Event.FOCUSIN,r=n===p.HOVER?t.constructor.Event.MOUSELEAVE:t.constructor.Event.FOCUSOUT;e(t.element).on(i,t.config.selector,e.proxy(t._enter,t)).on(r,t.config.selector,e.proxy(t._leave,t))}}),this.config.selector?this.config=e.extend({},this.config,{trigger:"manual",selector:""}):this._fixTitle()}},{key:"_removeTetherClasses",value:function(e,t){return((t.baseVal||t).match(new RegExp("(^|\\s)"+c+"-\\S+","g"))||[]).join(" ")}},{key:"_fixTitle",value:function(){var e=typeof this.element.getAttribute("data-original-title");(this.element.getAttribute("title")||"string"!==e)&&(this.element.setAttribute("data-original-title",this.element.getAttribute("title")||""),this.element.setAttribute("title",""))}},{key:"_enter",value:function(t,n){var i=this.constructor.DATA_KEY;return n=n||e(t.currentTarget).data(i),n||(n=new this.constructor(t.currentTarget,this._getDelegateConfig()),e(t.currentTarget).data(i,n)),t&&(n._activeTrigger["focusin"===t.type?p.FOCUS:p.HOVER]=!0),e(n.getTipElement()).hasClass(v.IN)||n._hoverState===_.IN?void(n._hoverState=_.IN):(clearTimeout(n._timeout),n._hoverState=_.IN,n.config.delay&&n.config.delay.show?void(n._timeout=setTimeout(function(){n._hoverState===_.IN&&n.show()},n.config.delay.show)):void n.show())}},{key:"_leave",value:function(t,n){var i=this.constructor.DATA_KEY;return n=n||e(t.currentTarget).data(i),n||(n=new this.constructor(t.currentTarget,this._getDelegateConfig()),e(t.currentTarget).data(i,n)),t&&(n._activeTrigger["focusout"===t.type?p.FOCUS:p.HOVER]=!1),n._isWithActiveTrigger()?void 0:(clearTimeout(n._timeout),n._hoverState=_.OUT,n.config.delay&&n.config.delay.hide?void(n._timeout=setTimeout(function(){n._hoverState===_.OUT&&n.hide()},n.config.delay.hide)):void n.hide())}},{key:"_isWithActiveTrigger",value:function(){for(var e in this._activeTrigger)if(this._activeTrigger[e])return!0;return!1}},{key:"_getConfig",value:function(n){return n=e.extend({},this.constructor.Default,e(this.element).data(),n),n.delay&&"number"==typeof n.delay&&(n.delay={show:n.delay,hide:n.delay}),s.typeCheckConfig(t,n,this.constructor.DefaultType),n}},{key:"_getDelegateConfig",value:function(){var e={};if(this.config)for(var t in this.config)this.constructor.Default[t]!==this.config[t]&&(e[t]=this.config[t]);return e}}],[{key:"_jQueryInterface",value:function(t){return this.each(function(){var n=e(this).data(o),i="object"==typeof t?t:null;(n||!/destroy|hide/.test(t))&&(n||(n=new l(this,i),e(this).data(o,n)),"string"==typeof t&&n[t]())})}},{key:"VERSION",get:function(){return i}},{key:"Default",get:function(){return h}},{key:"NAME",get:function(){return t}},{key:"DATA_KEY",get:function(){return o}},{key:"Event",get:function(){return g}},{key:"EVENT_KEY",get:function(){return a}},{key:"DefaultType",get:function(){return d}}]),l}();return e.fn[t]=T._jQueryInterface,e.fn[t].Constructor=T,e.fn[t].noConflict=function(){return e.fn[t]=l,T._jQueryInterface},T}(jQuery));(function(e){var s="popover",a="4.0.0",l="bs.popover",u="."+l,c=e.fn[s],h=e.extend({},o.Default,{placement:"right",trigger:"click",content:"",template:'<div class="popover" role="tooltip"><div class="popover-arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'}),d=e.extend({},o.DefaultType,{content:"(string|function)"}),f={FADE:"fade",IN:"in"},_={TITLE:".popover-title",CONTENT:".popover-content",ARROW:".popover-arrow"},g={HIDE:"hide"+u,HIDDEN:"hidden"+u,SHOW:"show"+u,SHOWN:"shown"+u,INSERTED:"inserted"+u,CLICK:"click"+u,FOCUSIN:"focusin"+u,FOCUSOUT:"focusout"+u,MOUSEENTER:"mouseenter"+u,MOUSELEAVE:"mouseleave"+u},v=function(o){function c(){n(this,c),i(Object.getPrototypeOf(c.prototype),"constructor",this).apply(this,arguments)}return t(c,o),r(c,[{key:"isWithContent",value:function(){return this.getTitle()||this._getContent()}},{key:"getTipElement",value:function(){return this.tip=this.tip||e(this.config.template)[0]}},{key:"setContent",value:function(){var t=this.getTipElement(),n=this.getTitle(),i=this._getContent(),r=e(t).find(_.TITLE)[0];r&&(r[this.config.html?"innerHTML":"innerText"]=n),e(t).find(_.CONTENT).children().detach().end()[this.config.html?"string"==typeof i?"html":"append":"text"](i),e(t).removeClass(f.FADE).removeClass(f.IN),this.cleanupTether()}},{key:"_getContent",value:function(){return this.element.getAttribute("data-content")||("function"==typeof this.config.content?this.config.content.call(this.element):this.config.content)}}],[{key:"_jQueryInterface",value:function(t){return this.each(function(){var n=e(this).data(l),i="object"==typeof t?t:null;(n||!/destroy|hide/.test(t))&&(n||(n=new c(this,i),e(this).data(l,n)),"string"==typeof t&&n[t]())})}},{key:"VERSION",get:function(){return a}},{key:"Default",get:function(){return h}},{key:"NAME",get:function(){return s}},{key:"DATA_KEY",get:function(){return l}},{key:"Event",get:function(){return g}},{key:"EVENT_KEY",get:function(){return u}},{key:"DefaultType",get:function(){return d}}]),c}(o);return e.fn[s]=v._jQueryInterface,e.fn[s].Constructor=v,e.fn[s].noConflict=function(){return e.fn[s]=c,v._jQueryInterface},v})(jQuery)}(jQuery);
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 require('angular');
-var MainController = require('./controllers/MainController');
+
+// To improve to be more programatical later!
+var MainController   = require('./controllers/MainController');
+var StartsWithFilter = require('./filters/startsWith');
 
 angular.module('app', []);
 
 angular
   .module('app')
-  .controller('MainController', MainController);
+  .controller('MainController', MainController)
+  .filter('startsWithLetter', StartsWithFilter);
 
-},{"./controllers/MainController":2,"angular":5}],2:[function(require,module,exports){
+},{"./controllers/MainController":2,"./filters/startsWith":3,"angular":6}],2:[function(require,module,exports){
 var dictionary = require("../../data/dictionary");
 
 module.exports = function() {
-	this.all = dictionary;
+	var self      = this;
+	self.query    = null;
+	self.all      = dictionary;
+	self.letters  = 'abcdefghijklmnopqrstuvwxyz'.split('');
+	self.selected = {};
+
+	self.sort = function(query) {
+		event.preventDefault();
+		self.query = query;
+	};
+
+	self.define = function(item) {
+		event.preventDefault();
+		self.selected = item;
+	};
 };
 
-},{"../../data/dictionary":3}],3:[function(require,module,exports){
-module.exports=[{"word":"Angular","def":"A front-end framework created by Misko Hevery and Adam Abrons.","analogy":"Angular is like the tv screen."},{"word":"Node","def":"Server-side Javascript","analogy":"Javascript"},{"word":"Express"}]
+},{"../../data/dictionary":4}],3:[function(require,module,exports){
+function stringStartsWith(string, prefix) {
+  return string.toLowerCase().slice(0, prefix.length) == prefix.toLowerCase();
+}
+
+module.exports = function () {
+  return function(items, letters) {
+    if (letters === null) return false;
+    var filtered = [];
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      console.log(item.word);
+      console.log(letters);
+      if (stringStartsWith(item.word, letters)) filtered.push(item);
+    }
+    console.log(filtered);
+    return filtered;
+  };
+};
+
 },{}],4:[function(require,module,exports){
+module.exports=[{"word":"Angular","def":"A front-end framework created by Misko Hevery and Adam Abrons.","analogy":"Angular is like the tv screen."},{"word":"Array","def":"An ordered collection of objects."},{"word":"Node","def":"Server-side Javascript","analogy":"Javascript"},{"word":"Express"}]
+},{}],5:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -29041,8 +29079,8 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":4}]},{},[1]);
+},{"./angular":5}]},{},[1]);
