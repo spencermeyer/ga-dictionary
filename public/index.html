@@ -3,10 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Technopedia</title>
-	<script src="/js/main.js"></script>
-	<link rel="stylesheet" href="/css/style.css">
+	<script src="/js/app.min.js"></script>
+	<link rel="stylesheet" href="/css/style.min.css">
 </head>
 <body>
+	<header>
+		<ng-include src="'nav.html'"></ng-include>
+	</header>
 	<div ng-controller="MainController as main">
 		<ul>
 			<li ng-repeat="item in main.all">

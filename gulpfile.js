@@ -1,16 +1,20 @@
-var gulp           = require('gulp');
-var gutil          = require('gulp-util');
-var sass           = require('gulp-ruby-sass');
-var connect        = require('gulp-connect');
-var yaml           = require('gulp-yaml');
 var browserify     = require('browserify');
 var source         = require('vinyl-source-stream');
 var mainBowerFiles = require('main-bower-files');
+var gulp           = require('gulp');
+var gutil          = require('gulp-util');
+// var sass           = require('gulp-ruby-sass');
+var sass           = require('gulp-sass');
+var connect        = require('gulp-connect');
+var yaml           = require('gulp-yaml');
 var flatten        = require('gulp-flatten');
 var gulpFilter     = require('gulp-filter');
 var uglify         = require('gulp-uglify');
 var minifycss      = require('gulp-minify-css');
 var rename         = require('gulp-rename');
+var autoprefixer   = require('gulp-autoprefixer');
+var concat         = require('gulp-concat');
+var bower          = require('gulp-bower');
 
 gulp.task('connect', function () {
 	// Serve the public website from localhost:4000
@@ -20,64 +24,98 @@ gulp.task('connect', function () {
 	});
 });
 
+// Running the bower command to install components
+gulp.task('bowerinstall', function() {
+  return bower()
+	.pipe(gulp.dest('./bower_components'));
+});
+
 // grab libraries files from bower_components, minify and push in /public
 gulp.task('bower', function() {
+	// gulp-filter enables you to work on a subset of the original files by filtering them using globbing. When you're done and want all the original files back you just use the restore stream.
   var jsFilter   = gulpFilter('*.js', { restore: true });
   var scssFilter = gulpFilter('*.scss', { restore: true });
   var cssFilter  = gulpFilter('*.css', { restore: true });
   var fontFilter = gulpFilter(['*.eot', '*.woff', '*.svg', '*.ttf'], { restore: true });
 	var dest_path  = "./assets";
 
-  return gulp.src(mainBowerFiles())
+	// overrides are in bower.json
+	var mainFiles = mainBowerFiles();
+
+	gutil.log(gutil.colors.yellow('The main files found are: '));
+	mainFiles.forEach(function(file){
+	  gutil.log(gutil.colors.yellow(file));
+	});
+
+	return gulp.src(mainBowerFiles(), {
+    base: 'bower_components'
+  })
 
   // grab vendor js files from bower_components, minify and push in /public
+	// js mainFiles are not meant to be minified
   .pipe(jsFilter)
-  .pipe(gulp.dest(dest_path + '/js/'))
+  .pipe(gulp.dest(dest_path + '/js/vendor/'))
+	// minify the file again using uglify
   .pipe(uglify())
+	// Rename with .min
   .pipe(rename({
     suffix: ".min"
   }))
-  .pipe(gulp.dest(dest_path + '/js/'))
+  .pipe(gulp.dest(dest_path + '/js/vendor/'))
   .pipe(jsFilter.restore)
 
 	// grab vendor css files from bower_components, minify and push in /public
 	.pipe(scssFilter)
-	.pipe(gulp.dest(dest_path + '/scss'))
+	.pipe(gulp.dest(dest_path + '/scss/vendor/'))
 	.pipe(cssFilter.restore)
 
   // grab vendor css files from bower_components, minify and push in /public
   .pipe(cssFilter)
-  .pipe(gulp.dest(dest_path + '/css'))
+  .pipe(gulp.dest(dest_path + '/css/vendor/'))
   .pipe(minifycss())
   .pipe(rename({
-      suffix: ".min"
+    suffix: ".min"
   }))
-  .pipe(gulp.dest(dest_path + '/css'))
+  .pipe(gulp.dest(dest_path + '/css/vendor/'))
   .pipe(cssFilter.restore)
 
   // grab vendor font files from bower_components and push in /public
   .pipe(fontFilter)
-  .pipe(flatten())
-  .pipe(gulp.dest(dest_path + '/fonts'))
+  // .pipe(flatten())
+  .pipe(gulp.dest(dest_path + '/fonts/vendor/'))
 	.pipe(fontFilter.restore);
 });
 
 gulp.task('browserify', function() {
 	// Grabs the app.js file
 	return browserify('./app/app.js')
-	// bundles it and creates a file called main.js
+	// bundles it
 	.bundle()
+	// and creates a file called main.js
 	.pipe(source('main.js'))
-	// saves it the public/js/ directory
-	.pipe(gulp.dest('./public/js/'));
+	// saves it the assets/js/ directory
+	.pipe(gulp.dest('./assets/js/'));
 });
 
-gulp.task('sass', function() {
-	return sass('./assets/scss/style.scss')
-	.pipe(gulp.dest('public/css'));
+gulp.task("sass", function(){
+	gutil.log(gutil.colors.red("Generate CSS files " + (new Date()).toString()));
+	// Load the style.scss file, any files should be @imported
+
+	return gulp.src('./assets/scss/style.scss')
+    .pipe(sass({
+      includePaths: ['./bower_components/bootstrap' + '/assets/stylesheets'],
+    }))
+	  // Add auto-prefixes
+		.pipe(autoprefixer("last 3 version"))
+		// Export expanded version
+		.pipe(gulp.dest("./public/css"))
+		// Minify and rename
+		.pipe(minifycss())
+		.pipe(rename({ suffix: '.min' }))
+		.pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('yaml', function() {
+gulp.task('yaml', function(){
 	return gulp.src('./data/*.yml')
 	// convert the yaml to json
 	.pipe(yaml())
@@ -90,11 +128,27 @@ gulp.task('yaml', function() {
 	.pipe(gulp.dest('./data/'));
 });
 
+gulp.task('jsconcat', function(){
+	return gulp.src([
+		'./assets/js/jquery.min.js',
+		'./assets/js/bootstrap.min.js',
+		'./assets/js/main.js',
+		'./assets/js/*.js',
+	])
+  .pipe(concat('app.js'))
+	.pipe(gulp.dest('./public/js/'))
+  .pipe(uglify())
+	.pipe(rename({ suffix: '.min' }))
+  .pipe(gulp.dest('./public/js/'));
+});
+
 gulp.task('watch', function() {
 	gulp.watch('app/**/*.js', ['browserify']);
-	gulp.watch('./assets/scss/style.scss', ['sass']);
-	gulp.watch('data/*.yml', ['yaml', 'browserify']);
+	gulp.watch('assets/js/**/*.js', ['jsconcat']);
+	gulp.watch('assets/scss/style.scss', ['sass']);
+	gulp.watch('data/*.yml', ['yaml']);
 	gulp.watch('bower_components/**', ['bower']);
 });
 
-gulp.task('default', ['connect', 'bower', 'watch']);
+gulp.task('all', ['connect', 'bower', 'browserify', 'sass', 'yaml']);
+gulp.task('default', ['all', 'watch']);

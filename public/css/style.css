@@ -1,6 +1,2 @@
-body {
-  background: #f5f5f5; }
-  body h1 {
-    text-align: center; }
-  body footer {
-    text-align: center; }
+body a {
+  color: red; }
