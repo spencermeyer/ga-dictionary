@@ -15,8 +15,8 @@ var autoprefixer   = require('gulp-autoprefixer');
 var concat         = require('gulp-concat');
 var bower          = require('gulp-bower');
 
-gulp.task('connect', function () {
-	// Serve the public website from localhost:4000
+// Serve the public website from localhost:4000
+gulp.task('connect', function() {
 	connect.server({
 		root: 'public',
 		port: 4000
@@ -29,6 +29,7 @@ gulp.task('bower:install', function() {
 	.pipe(gulp.dest('./bower_components'));
 });
 
+// Moving bower fonts to public/fonts
 gulp.task('bower:fonts', function(){
 	return gulp.src(['bower_components/**/*.{otf,eot,svg,ttf,woff,woff2}'])
 	// Prevent a nested folder structure
@@ -36,12 +37,40 @@ gulp.task('bower:fonts', function(){
   .pipe(gulp.dest('public/fonts/'));
 });
 
-gulp.task('bower', ['bower:fonts']);
+// Moving bower js files to assets/js
+gulp.task('bower:js', function(){
+	var jsFilter   = gulpFilter('*.js', { restore: true });
+  // mainFiles can be overridden here or bower.json with "overrides":
+	// var mainFiles = mainBowerFiles({
+	// 	"overrides": {
+	// 		"font-awesome": {
+	// 			"main": [
+	// 				"./scss/font-awesome.scss",
+	// 				"./fonts/*"
+	// 			]
+	// 		}
+	// 	}
+	// });
+	var mainFiles = mainBowerFiles();
+	return gulp.src(mainFiles)
+	// js mainFiles are not meant to be minified
+  .pipe(jsFilter)
+	// minify the file again using uglify
+  .pipe(uglify())
+	// Rename with .min
+  .pipe(rename({
+    suffix: ".min"
+  }))
+	// Save to js/vendor
+  .pipe(gulp.dest('./assets/js/vendor/'));
+});
+
+gulp.task('bower', ['bower:fonts', 'bower:js']);
 
 // grab libraries files from bower_components, minify and push in /public
 // gulp.task('bower', function() {
 // 	// gulp-filter enables you to work on a subset of the original files by filtering them using globbing. When you're done and want all the original files back you just use the restore stream.
-//   var jsFilter   = gulpFilter('*.js', { restore: true });
+//
 //   var scssFilter = gulpFilter('*.scss', { restore: true });
 //   var cssFilter  = gulpFilter('*.css', { restore: true });
 //   var fontFilter = gulpFilter([
@@ -86,17 +115,7 @@ gulp.task('bower', ['bower:fonts']);
 // 	.pipe(cssFilter.restore)
 //
 //   // grab vendor js files from bower_components, minify and push in /public
-// 	// js mainFiles are not meant to be minified
-//   .pipe(jsFilter)
-//   .pipe(gulp.dest(dest_path + '/js/vendor/'))
-// 	// minify the file again using uglify
-//   .pipe(uglify())
-// 	// Rename with .min
-//   .pipe(rename({
-//     suffix: ".min"
-//   }))
-//   .pipe(gulp.dest(dest_path + '/js/vendor/'))
-// 	.pipe(jsFilter.restore)
+//
 //
 // 	// grab vendor css files from bower_components, minify and push in /public
 // 	.pipe(scssFilter)
