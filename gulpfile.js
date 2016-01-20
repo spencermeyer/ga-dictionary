@@ -15,13 +15,20 @@ var autoprefixer   = require('gulp-autoprefixer');
 var concat         = require('gulp-concat');
 var bower          = require('gulp-bower');
 
-// Serve the public website from localhost:4000
-gulp.task('connect', function() {
+gulp.task('serve:development', function() {
 	connect.server({
 		root: 'public',
-		port: 4000,
+		port: process.env.PORT || 4000,
 		livereload: true
 	});
+});
+
+gulp.task('serve:production', function() {
+  connect.server({
+    		root: 'public',
+    port: process.env.PORT || 4000,
+    livereload: false
+  });
 });
 
 // Running the bower command to install components
@@ -129,5 +136,5 @@ gulp.task('watch', function() {
 	gulp.watch('bower_components/**', ['bower']);
 });
 
-gulp.task('all', ['connect', 'bower', 'browserify', 'sass', 'yaml']);
+gulp.task('all', ['serve:development', 'bower', 'browserify', 'sass', 'yaml']);
 gulp.task('default', ['all', 'watch']);
