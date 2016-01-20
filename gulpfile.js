@@ -19,7 +19,8 @@ var bower          = require('gulp-bower');
 gulp.task('connect', function() {
 	connect.server({
 		root: 'public',
-		port: 4000
+		port: 4000,
+		livereload: true
 	});
 });
 
@@ -42,7 +43,7 @@ gulp.task('bower:js', function(){
 	var jsFilter   = gulpFilter('*.js', { restore: true });
   // mainFiles can be overridden here or bower.json with "overrides":
 	var mainFiles = mainBowerFiles();
-	
+
 	return gulp.src(mainFiles)
 	// js mainFiles are not meant to be minified
   .pipe(jsFilter)
@@ -107,8 +108,9 @@ gulp.task('yaml', function(){
 
 gulp.task('jsconcat', function(){
 	return gulp.src([
-		'./assets/js/jquery.min.js',
-		'./assets/js/bootstrap.min.js',
+		'./assets/js/vendor/jquery.min.js',
+		'./assets/js/vendor/bootstrap.min.js',
+		'./assets/js/vendor/*.js',
 		'./assets/js/main.js',
 		'./assets/js/*.js',
 	])

@@ -6573,5 +6573,24 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-percent:before {
   content: ""; }
 
-body a {
-  color: red; }
+html, body {
+  height: 100%;
+  min-height: 100%; }
+
+body .navbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0;
+  color: white; }
+  body .navbar a {
+    color: white; }
+
+body .results {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
+  body .results ul {
+    padding: 0;
+    margin: 0; }
+
+body footer {
+  text-align: center; }

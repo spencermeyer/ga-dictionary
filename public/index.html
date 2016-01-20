@@ -7,22 +7,8 @@
 	<link rel="stylesheet" href="/css/style.min.css">
 </head>
 <body>
-	<header>
-		<ng-include src="'nav.html'"></ng-include>
-	</header>
-	<div ng-controller="MainController as main">
-		<ul>
-			<li ng-repeat="item in main.all">
-				<ul>
-					<h1>{{ item.word }}</h1>
-					<p>{{ item.def }}</p>
-					<p>{{ item.analogy }}</p>
-				</ul>
-			</li>
-		</ul>
-	</div>
-	<footer>
-		Made with ♥ in London, UK.
-	</footer>
+	<ng-include src="'_header.html'"></ng-include>
+	<ng-include src="'_main.html'"></ng-include>
+	<ng-include src="'_footer.html'"></ng-include>
 </body>
 </html>

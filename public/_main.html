@@ -1,0 +1,22 @@
+<main ng-controller="MainController as main" class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." ng-model="query">
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button">Go!</button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <ul class="results">
+    <li ng-repeat="item in main.all | filter:query | orderBy: 'word'">
+      <ul>
+        <h1>{{ item.word }}</h1>
+        <p>{{ item.def }}</p>
+        <p>{{ item.analogy }}</p>
+      </ul>
+    </li>
+  </ul>
+</main>
