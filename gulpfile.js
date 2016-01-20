@@ -41,17 +41,8 @@ gulp.task('bower:fonts', function(){
 gulp.task('bower:js', function(){
 	var jsFilter   = gulpFilter('*.js', { restore: true });
   // mainFiles can be overridden here or bower.json with "overrides":
-	// var mainFiles = mainBowerFiles({
-	// 	"overrides": {
-	// 		"font-awesome": {
-	// 			"main": [
-	// 				"./scss/font-awesome.scss",
-	// 				"./fonts/*"
-	// 			]
-	// 		}
-	// 	}
-	// });
 	var mainFiles = mainBowerFiles();
+	
 	return gulp.src(mainFiles)
 	// js mainFiles are not meant to be minified
   .pipe(jsFilter)
@@ -65,63 +56,8 @@ gulp.task('bower:js', function(){
   .pipe(gulp.dest('./assets/js/vendor/'));
 });
 
+// Grouping bower related tasks
 gulp.task('bower', ['bower:fonts', 'bower:js']);
-
-// grab libraries files from bower_components, minify and push in /public
-// gulp.task('bower', function() {
-// 	// gulp-filter enables you to work on a subset of the original files by filtering them using globbing. When you're done and want all the original files back you just use the restore stream.
-//
-//   var scssFilter = gulpFilter('*.scss', { restore: true });
-//   var cssFilter  = gulpFilter('*.css', { restore: true });
-//   var fontFilter = gulpFilter([
-// 		'*.otf','*.eot','*.svg','*.ttf','*.woff','*.woff2'
-// 	], { restore: true });
-// 	var dest_path  = "./assets";
-//
-// 	var mainFiles = mainBowerFiles(
-// 	// overrides can also be put in bower.json
-// 	{
-// 		"overrides": {
-// 	    "font-awesome": {
-// 	      "main": [
-// 	        "./scss/font-awesome.scss",
-// 	        "./fonts/*"
-// 	      ]
-// 	    }
-// 	  }
-// 	});
-//
-// 	gutil.log(gutil.colors.yellow('The main files found are: '));
-// 	mainFiles.forEach(function(file){
-// 	  gutil.log(gutil.colors.yellow(file));
-// 	});
-//
-// 	return gulp.src(mainFiles)
-//
-// 	// grab vendor font files from bower_components and push in /public
-//   .pipe(fontFilter)
-//   .pipe(flatten())
-//   .pipe(gulp.dest(dest_path + '/fonts/vendor/'))
-// 	.pipe(fontFilter.restore)
-//
-// 	// grab vendor css files from bower_components, minify and push in /public
-// 	.pipe(cssFilter)
-// 	.pipe(gulp.dest(dest_path + '/css/vendor/'))
-// 	.pipe(minifycss())
-// 	.pipe(rename({
-// 		suffix: ".min"
-// 	}))
-// 	.pipe(gulp.dest(dest_path + '/css/vendor/'))
-// 	.pipe(cssFilter.restore)
-//
-//   // grab vendor js files from bower_components, minify and push in /public
-//
-//
-// 	// grab vendor css files from bower_components, minify and push in /public
-// 	.pipe(scssFilter)
-// 	.pipe(gulp.dest(dest_path + '/scss/vendor/'))
-// 	.pipe(scssFilter.restore);
-// });
 
 gulp.task('browserify', function() {
 	// Grabs the app.js file
