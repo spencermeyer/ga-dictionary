@@ -6665,10 +6665,10 @@ select {
   color: white; }
 
 .navbar-light .navbar-nav .nav-link {
-  color: #fff;
+  color: white;
   padding: 0; }
   .navbar-light .navbar-nav .nav-link:hover {
-    color: red; }
+    color: white; }
 
 footer {
   padding: 20px 0;
@@ -6677,7 +6677,7 @@ footer {
     color: red; }
 
 .results a::first-letter {
-  color: red; }
+  color: #FE2633; }
 
 .results a.list-group-item, .results button.list-group-item {
   color: black; }
