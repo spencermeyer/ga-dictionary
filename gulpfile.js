@@ -25,7 +25,7 @@ gulp.task('serve:development', function() {
 
 gulp.task('serve:production', function() {
   connect.server({
-    		root: 'public',
+    root: 'public',
     port: process.env.PORT || 4000,
     livereload: false
   });
