@@ -101,7 +101,7 @@ gulp.task("sass", function(){
 });
 
 gulp.task('yaml', function(){
-	return gulp.src('./data/*.yml')
+	return gulp.src('./dictionary.yml')
 	// convert the yaml to json
 	.pipe(yaml())
 	// output to terminal
@@ -132,7 +132,7 @@ gulp.task('watch', function() {
 	gulp.watch('app/**/*.js', ['browserify']);
 	gulp.watch('assets/js/**/*.js', ['jsconcat']);
 	gulp.watch('assets/scss/**/*.scss', ['sass']);
-	gulp.watch('data/*.yml', ['yaml']);
+	gulp.watch('dictionary.yml', ['yaml']);
 	gulp.watch('bower_components/**', ['bower']);
 });
 

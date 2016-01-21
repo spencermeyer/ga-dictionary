@@ -10,6 +10,7 @@ module.exports = function() {
 		$('#definition').modal('show');
 		$("#definition h4").text(item.word);
 		$("#definition .modal-body").text(item.definition);
+		$("#definition a.link").attr("href", item.link);
 	};
 
 	self.clear = function(){

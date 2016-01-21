@@ -2,18 +2,11 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search {{ main.all.length }} tech definitions" ng-model="main.query" value="main.query">
+        <input type="text" class="form-control" placeholder="Search {{ main.all.length }} definitions" ng-model="main.query" value="main.query">
         <span class="input-group-btn">
           <button class="btn btn-secondary" type="button" ng-click="main.clear()">Clear</button>
         </span>
       </div>
-      <!-- Commented out for the moment.
-        <div class="input-group">
-        <select class="form-control" ng-model="main.query" ng-options="letter for letter in main.letters">
-          <option value="">Select a letter</option>
-        </select>
-      </div>
-      -->
     </div>
   </div>
 
