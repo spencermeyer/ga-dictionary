@@ -11,8 +11,11 @@
   </div>
 
   <div class="list-group results">
-    <a href="#" class="list-group-item" ng-repeat="item in main.all | startsWithLetter:main.query | orderBy: 'word'" data-toggle="modal" data-target="#definition_{{item.word}}" ng-click="main.open(item)">
+    <a href="#" class="list-group-item" ng-repeat="item in items = (main.all | startsWithLetter:main.query | orderBy: 'word')" data-toggle="modal" data-target="#definition_{{item.word}}" ng-click="main.open(item)">
       {{ item.word }}
     </a>
+    <div ng-hide="items.length" class="alert alert-danger" role="alert">
+      <strong>Uh oh!</strong> Why don't you <a href="#" data-toggle="modal" data-target="#contributing">contribute</a>?
+    </div>
   </div>
 </main>
