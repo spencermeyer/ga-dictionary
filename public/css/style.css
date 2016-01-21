@@ -6681,3 +6681,13 @@ footer {
 
 .results a.list-group-item, .results button.list-group-item {
   color: black; }
+
+.github {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0; }
+
+@media only screen and (max-width: 625px) {
+  .github {
+    display: none; } }
