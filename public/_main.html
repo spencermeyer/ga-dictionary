@@ -4,7 +4,7 @@
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search {{ main.all.length }} tech definitions" ng-model="main.query" value="main.query">
         <span class="input-group-btn">
-          <button class="btn btn-secondary" type="button">Go!</button>
+          <button class="btn btn-secondary" type="button" ng-click="main.clear()">Clear</button>
         </span>
       </div>
       <!-- Commented out for the moment.

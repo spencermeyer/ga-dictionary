@@ -26,6 +26,10 @@ module.exports = function() {
 		$("#definition h4").text(item.word);
 		$("#definition .modal-body").text(item.definition);
 	};
+
+	self.clear = function(){
+		self.query = "";
+	};
 };
 
 },{"../../data/dictionary":4}],3:[function(require,module,exports){

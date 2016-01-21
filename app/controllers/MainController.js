@@ -11,4 +11,8 @@ module.exports = function() {
 		$("#definition h4").text(item.word);
 		$("#definition .modal-body").text(item.definition);
 	};
+
+	self.clear = function(){
+		self.query = "";
+	};
 };
