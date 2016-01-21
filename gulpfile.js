@@ -131,7 +131,7 @@ gulp.task('jsconcat', function(){
 gulp.task('watch', function() {
 	gulp.watch('app/**/*.js', ['browserify']);
 	gulp.watch('assets/js/**/*.js', ['jsconcat']);
-	gulp.watch('assets/scss/style.scss', ['sass']);
+	gulp.watch('assets/scss/**/*.scss', ['sass']);
 	gulp.watch('data/*.yml', ['yaml']);
 	gulp.watch('bower_components/**', ['bower']);
 });

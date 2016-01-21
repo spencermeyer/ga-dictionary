@@ -3,6 +3,10 @@
   margin: 0 0 20px;
 }
 
+input[type="text"] {
+  background: $gray;
+}
+
 select {
   height: 38px;
   width: 100%;

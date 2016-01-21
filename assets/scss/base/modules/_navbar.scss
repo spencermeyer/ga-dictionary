@@ -30,12 +30,3 @@
     color: red;
   }
 }
-
-// iPhone - http://stephen.io/mediaqueries/#iPhone
-@media only screen
-and (min-device-width : 375px)
-and (max-device-width : 667px) {
-  .navbar h1 {
-    font-size: 2rem
-  }
-}
