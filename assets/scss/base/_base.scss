@@ -1,6 +1,9 @@
 @import 'variables';
 @import 'fonts';
 @import 'typography';
+@import 'structure';
+@import 'forms';
 
-// Will refactor at some point
-@import 'other';
+@import 'modules/navbar';
+@import 'modules/footer';
+@import 'modules/results';

@@ -1,0 +1,8 @@
+.results {
+  a::first-letter {
+    color: red
+  }
+  a.list-group-item, button.list-group-item {
+    color: $black;
+  }
+}

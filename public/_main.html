@@ -7,17 +7,19 @@
           <button class="btn btn-secondary" type="button">Go!</button>
         </span>
       </div>
-      <div class="input-group">
+      <!-- Commented out for the moment.
+        <div class="input-group">
         <select class="form-control" ng-model="main.query" ng-options="letter for letter in main.letters">
           <option value="">Select a letter</option>
         </select>
       </div>
+      -->
     </div>
   </div>
 
   <div class="list-group results">
     <a href="#" class="list-group-item" ng-repeat="item in main.all | startsWithLetter:main.query | orderBy: 'word'" data-toggle="modal" data-target="#definition_{{item.word}}" ng-click="main.open(item)">
-      <h3>{{ item.word }}</h3>
+      {{ item.word }}
     </a>
   </div>
 </main>

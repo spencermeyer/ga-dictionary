@@ -6630,48 +6630,48 @@ html, body {
   height: 100%;
   min-height: 100%; }
 
-body .navbar {
+.input-group {
+  width: 100%;
+  margin: 0 0 20px; }
+
+select {
+  height: 38px;
+  width: 100%; }
+
+.navbar {
   background: #000;
   border-radius: 0 0 .25rem .25rem;
   color: white;
   margin: 0 0 20px; }
-  body .navbar h1 {
+  .navbar h1 {
     margin: 0;
     padding: 0; }
-  body .navbar li.nav-item {
+  .navbar li.nav-item {
     line-height: 53px; }
-    body .navbar li.nav-item:first-child {
+    .navbar li.nav-item:first-child {
       line-height: 60px; }
-  body .navbar a, body .navbar a:visited, body .navbar a:link, body .navbar a:active {
+  .navbar a, .navbar a:visited, .navbar a:link, .navbar a:active {
     color: white; }
-  body .navbar img {
+  .navbar img {
     width: 30px; }
 
-body .navbar-light .navbar-nav .nav-link:focus, body .navbar-light .navbar-nav .nav-link:hover {
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
   color: white; }
 
-body .navbar-light .navbar-nav .nav-link {
+.navbar-light .navbar-nav .nav-link {
   color: #fff;
   padding: 0; }
-  body .navbar-light .navbar-nav .nav-link:hover {
+  .navbar-light .navbar-nav .nav-link:hover {
     color: red; }
 
-body a.list-group-item, body button.list-group-item {
-  color: black; }
-
-body .input-group {
-  width: 100%;
-  margin: 0 0 20px; }
-
-body select {
-  height: 38px;
-  width: 100%; }
-
-body .results h3::first-letter {
-  color: red; }
-
-body footer {
+footer {
   padding: 20px 0;
   text-align: center; }
-  body footer span {
+  footer span {
     color: red; }
+
+.results a::first-letter {
+  color: red; }
+
+.results a.list-group-item, .results button.list-group-item {
+  color: black; }
