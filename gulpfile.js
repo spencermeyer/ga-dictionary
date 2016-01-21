@@ -136,5 +136,6 @@ gulp.task('watch', function() {
 	gulp.watch('bower_components/**', ['bower']);
 });
 
-gulp.task('all', ['serve:development', 'bower', 'browserify', 'sass', 'yaml']);
-gulp.task('default', ['all', 'watch']);
+gulp.task('all', ['bower', 'browserify', 'sass', 'yaml', 'watch']);
+gulp.task('default', ['serve:development', 'all']);
+gulp.task('heroku:prod', ['serve:production', 'all']);
