@@ -2,7 +2,7 @@ var dictionary = require("../../data/dictionary");
 
 module.exports = function() {
 	var self      = this;
-	self.query    = null;
+	self.query    = "";
 	self.all      = dictionary;
 	self.letters  = 'abcdefghijklmnopqrstuvwxyz'.split('');
 	self.selected = {};
@@ -15,5 +15,11 @@ module.exports = function() {
 	self.define = function(item) {
 		event.preventDefault();
 		self.selected = item;
+	};
+
+	self.open = function(item){
+		$('#definition').modal('show');
+		$("#definition h4").text(item.word);
+		$("#definition .modal-body").text(item.definition);
 	};
 };

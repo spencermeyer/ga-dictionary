@@ -7,18 +7,17 @@
           <button class="btn btn-secondary" type="button">Go!</button>
         </span>
       </div>
+      <div class="input-group">
+        <select class="form-control" ng-model="main.query" ng-options="letter for letter in main.letters">
+          <option value="">Select a letter</option>
+        </select>
+      </div>
     </div>
   </div>
 
-  <ul class="filter">
-    <li ng-repeat="letter in main.letters">
-      <a href="#" ng-click="main.sort(letter)">{{ letter | uppercase }}</a>
-    </li>
-  </ul>
-
-  <ul class="results">
-    <li ng-repeat="item in main.all | startsWithLetter:main.query">
-      <h2><a href="#" ng-click="main.define(item)">{{ item.word }}</a></h2>
-    </li>
-  </ul>
+  <div class="list-group results">
+    <a href="#" class="list-group-item" ng-repeat="item in main.all | startsWithLetter:main.query | orderBy: 'word'" data-toggle="modal" data-target="#definition_{{item.word}}" ng-click="main.open(item)">
+      <h3>{{ item.word }}</h3>
+    </a>
+  </div>
 </main>

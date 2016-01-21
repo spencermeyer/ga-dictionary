@@ -1,45 +1,6 @@
+// Vendor
 @import "bootstrap";
 @import "font-awesome";
 
-html, body {
-  height: 100%;
-  min-height: 100%;
-}
-
-body {
-  .navbar {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0;
-    color: white;
-    a { color: white };
-  }
-
-  .filter {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    li {
-      display: inline-block;
-      padding: 10px;
-    }
-  }
-
-  .results {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-
-    li h2::first-letter {
-      color: red
-    }
-
-    ul {
-      padding: 0;
-      margin: 0;
-    }
-  }
-
-  footer {
-    text-align: center;
-  }
-}
+// Local
+@import "base/base";

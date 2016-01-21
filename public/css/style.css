@@ -6573,34 +6573,105 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-percent:before {
   content: ""; }
 
+@font-face {
+  font-family: 'PFDinTextCompProBold';
+  src: font-url("pfdintextcomppro-bold.eot");
+  src: font-url("pfdintextcomppro-bold.eot?#iefix") format("embedded-opentype"), font-url("pfdintextcomppro-bold.woff") format("woff"), font-url("pfdintextcomppro-bold.ttf") format("truetype"), font-url("pfdintextcomppro-bold.svg#svgFontName") format("svg"); }
+
+@font-face {
+  font-family: 'PFDinTextCompProMedium';
+  src: font-url("pfdintextcomppro-medium.eot");
+  src: font-url("pfdintextcomppro-medium.eot?#iefix") format("embedded-opentype"), font-url("pfdintextcomppro-medium.woff") format("woff"), font-url("pfdintextcomppro-medium.ttf") format("truetype"), font-url("pfdintextcomppro-medium.svg#svgFontName") format("svg"); }
+
+@font-face {
+  font-family: 'PFDinTextCompProLight';
+  src: font-url("pfdintextcomppro-light.eot");
+  src: font-url("pfdintextcomppro-light.eot?#iefix") format("embedded-opentype"), font-url("pfdintextcomppro-light.woff") format("woff"), font-url("pfdintextcomppro-light.ttf") format("truetype"), font-url("pfdintextcomppro-light.svg#svgFontName") format("svg"); }
+
+@font-face {
+  font-family: 'News706BT-RomanC';
+  src: font-url("News706BT-RomanC.eot");
+  src: font-url("News706BT-RomanC.eot?#iefix") format("embedded-opentype"), font-url("News706BT-RomanC.woff") format("woff"), font-url("News706BT-RomanC.ttf") format("truetype"), font-url("News706BT-RomanC.svg#svgFontName") format("svg"); }
+
+@font-face {
+  font-family: 'News706BT-ItalicC';
+  src: font-url("News706BT-ItalicC.eot");
+  src: font-url("News706BT-ItalicC.eot?#iefix") format("embedded-opentype"), font-url("News706BT-ItalicC.woff") format("woff"), font-url("News706BT-ItalicC.ttf") format("truetype"), font-url("News706BT-ItalicC.svg#svgFontName") format("svg"); }
+
+@font-face {
+  font-family: 'News706BT-BoldC';
+  src: font-url("News706BT-BoldC.eot");
+  src: font-url("News706BT-BoldC.eot?#iefix") format("embedded-opentype"), font-url("News706BT-BoldC.woff") format("woff"), font-url("News706BT-BoldC.ttf") format("truetype"), font-url("News706BT-BoldC.svg#svgFontName") format("svg"); }
+
+@font-face {
+  font-family: 'Inconsolata';
+  src: font-url("inconsolata.eot");
+  src: font-url("inconsolata.eot?#iefix") format("embedded-opentype"), font-url("inconsolata.woff") format("woff"), font-url("inconsolata.ttf") format("truetype"), font-url("inconsolata.svg#svgFontName") format("svg"); }
+
+@font-face {
+  font-family: 'Iconic';
+  src: font-url("iconic.eot");
+  src: font-url("iconic.eot?#iefix") format("embedded-opentype"), font-url("iconic.woff") format("woff"), font-url("iconic.ttf") format("truetype"), font-url("iconic.svg#svgFontName") format("svg"); }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: "News706BT-RomanC", Georgia, serif;
+  font-size: 1em;
+  color: black; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "PFDinTextCompProBold", Impact, Arial, sans-serif;
+  line-height: 1.25em;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+  text-transform: uppercase; }
+
 html, body {
   height: 100%;
   min-height: 100%; }
 
 body .navbar {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0;
-  color: white; }
-  body .navbar a {
+  background: #000;
+  border-radius: 0 0 .25rem .25rem;
+  color: white;
+  margin: 0 0 20px; }
+  body .navbar h1 {
+    margin: 0;
+    padding: 0; }
+  body .navbar li.nav-item {
+    line-height: 53px; }
+    body .navbar li.nav-item:first-child {
+      line-height: 60px; }
+  body .navbar a, body .navbar a:visited, body .navbar a:link, body .navbar a:active {
     color: white; }
+  body .navbar img {
+    width: 30px; }
 
-body .filter {
-  margin: 0;
-  padding: 0;
-  list-style-type: none; }
-  body .filter li {
-    display: inline-block;
-    padding: 10px; }
+body .navbar-light .navbar-nav .nav-link:focus, body .navbar-light .navbar-nav .nav-link:hover {
+  color: white; }
 
-body .results {
-  list-style-type: none;
-  padding: 0;
-  margin: 0; }
-  body .results li h2::first-letter {
+body .navbar-light .navbar-nav .nav-link {
+  color: #fff;
+  padding: 0; }
+  body .navbar-light .navbar-nav .nav-link:hover {
     color: red; }
-  body .results ul {
-    padding: 0;
-    margin: 0; }
+
+body a.list-group-item, body button.list-group-item {
+  color: black; }
+
+body .input-group {
+  width: 100%;
+  margin: 0 0 20px; }
+
+body select {
+  height: 38px;
+  width: 100%; }
+
+body .results h3::first-letter {
+  color: red; }
 
 body footer {
+  padding: 20px 0;
   text-align: center; }
+  body footer span {
+    color: red; }

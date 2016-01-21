@@ -2,7 +2,7 @@ require('angular');
 
 // To improve to be more programatical later!
 var MainController   = require('./controllers/MainController');
-var StartsWithFilter = require('./filters/startsWith');
+var StartsWithFilter = require('./filters/startsWithFilter');
 
 angular.module('app', []);
 

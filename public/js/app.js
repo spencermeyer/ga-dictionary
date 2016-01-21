@@ -8,7 +8,7 @@ require('angular');
 
 // To improve to be more programatical later!
 var MainController   = require('./controllers/MainController');
-var StartsWithFilter = require('./filters/startsWith');
+var StartsWithFilter = require('./filters/startsWithFilter');
 
 angular.module('app', []);
 
@@ -17,12 +17,12 @@ angular
   .controller('MainController', MainController)
   .filter('startsWithLetter', StartsWithFilter);
 
-},{"./controllers/MainController":2,"./filters/startsWith":3,"angular":6}],2:[function(require,module,exports){
+},{"./controllers/MainController":2,"./filters/startsWithFilter":3,"angular":6}],2:[function(require,module,exports){
 var dictionary = require("../../data/dictionary");
 
 module.exports = function() {
 	var self      = this;
-	self.query    = null;
+	self.query    = "";
 	self.all      = dictionary;
 	self.letters  = 'abcdefghijklmnopqrstuvwxyz'.split('');
 	self.selected = {};
@@ -35,6 +35,12 @@ module.exports = function() {
 	self.define = function(item) {
 		event.preventDefault();
 		self.selected = item;
+	};
+
+	self.open = function(item){
+		$('#definition').modal('show');
+		$("#definition h4").text(item.word);
+		$("#definition .modal-body").text(item.definition);
 	};
 };
 
@@ -49,17 +55,14 @@ module.exports = function () {
     var filtered = [];
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
-      console.log(item.word);
-      console.log(letters);
       if (stringStartsWith(item.word, letters)) filtered.push(item);
     }
-    console.log(filtered);
     return filtered;
   };
 };
 
 },{}],4:[function(require,module,exports){
-module.exports=[{"word":"Angular","def":"A front-end framework created by Misko Hevery and Adam Abrons.","analogy":"Angular is like the tv screen."},{"word":"Array","def":"An ordered collection of objects."},{"word":"Node","def":"Server-side Javascript","analogy":"Javascript"},{"word":"Express"}]
+module.exports=[{"word":"Angular","definition":"A front-end framework created by Misko Hevery and Adam Abrons."},{"word":"array","definition":"An ordered collection of objects."},{"word":"node","definition":"Server-side Javascript"},{"word":"Express","definition":null},{"word":"Rails","definition":null},{"word":"Ruby","definition":null},{"word":"ruby","definition":null},{"word":"HTML","definition":null},{"word":"CSS","definition":null},{"word":"Javascript","definition":null},{"word":"EJS","definition":null},{"word":"ERB","definition":null},{"word":"HAML","definition":null},{"word":"SCSS","definition":null},{"word":"SASS","definition":null},{"word":"Grunt","definition":null},{"word":"Gulp","definition":null},{"word":"Boolean","definition":null},{"word":"dictionary","definition":null},{"word":"F","definition":null},{"word":"hash","definition":null},{"word":"iterate","definition":null},{"word":"K","definition":null},{"word":"L","definition":null},{"word":"M","definition":null},{"word":"N","definition":null},{"word":"O","definition":null},{"word":"package.json"},{"word":"Q","definition":null},{"word":"R","definition":null},{"word":"T","definition":null},{"word":"U","definition":null},{"word":"V","definition":null},{"word":"W","definition":null},{"word":"X","definition":null},{"word":"Y","definition":null},{"word":"Z","definition":null}]
 },{}],5:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.8
