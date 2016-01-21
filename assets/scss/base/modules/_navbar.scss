@@ -9,13 +9,6 @@
     padding: 0;
   }
 
-  li.nav-item {
-    &:first-child {
-      line-height: 60px;
-    }
-    line-height: 53px;
-  }
-
   a, a:visited, a:link, a:active {
     color: white;
   }
@@ -35,5 +28,14 @@
 
   &:hover {
     color: red;
+  }
+}
+
+// iPhone - http://stephen.io/mediaqueries/#iPhone
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px) {
+  .navbar h1 {
+    font-size: 2rem
   }
 }

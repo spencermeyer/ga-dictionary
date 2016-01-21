@@ -6575,43 +6575,49 @@ a.bg-danger:focus, a.bg-danger:hover {
 
 @font-face {
   font-family: 'PFDinTextCompProBold';
-  src: font-url("pfdintextcomppro-bold.eot");
-  src: font-url("pfdintextcomppro-bold.eot?#iefix") format("embedded-opentype"), font-url("pfdintextcomppro-bold.woff") format("woff"), font-url("pfdintextcomppro-bold.ttf") format("truetype"), font-url("pfdintextcomppro-bold.svg#svgFontName") format("svg"); }
+  src: url("../fonts/pfdintextcomppro-bold.eot#") format("eot"), url("../fonts/pfdintextcomppro-bold.woff") format("woff"), url("../fonts/pfdintextcomppro-bold.ttf") format("truetype"), url("../fonts/pfdintextcomppro-bold.svg#svgFontName") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 
 @font-face {
   font-family: 'PFDinTextCompProMedium';
-  src: font-url("pfdintextcomppro-medium.eot");
-  src: font-url("pfdintextcomppro-medium.eot?#iefix") format("embedded-opentype"), font-url("pfdintextcomppro-medium.woff") format("woff"), font-url("pfdintextcomppro-medium.ttf") format("truetype"), font-url("pfdintextcomppro-medium.svg#svgFontName") format("svg"); }
+  src: url("../fonts/pfdintextcomppro-medium.eot#") format("eot"), url("../fonts/pfdintextcomppro-medium.woff") format("woff"), url("../fonts/pfdintextcomppro-medium.ttf") format("truetype"), url("../fonts/pfdintextcomppro-medium.svg#svgFontName") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 
 @font-face {
   font-family: 'PFDinTextCompProLight';
-  src: font-url("pfdintextcomppro-light.eot");
-  src: font-url("pfdintextcomppro-light.eot?#iefix") format("embedded-opentype"), font-url("pfdintextcomppro-light.woff") format("woff"), font-url("pfdintextcomppro-light.ttf") format("truetype"), font-url("pfdintextcomppro-light.svg#svgFontName") format("svg"); }
+  src: url("../fonts/pfdintextcomppro-light.eot#") format("eot"), url("../fonts/pfdintextcomppro-light.woff") format("woff"), url("../fonts/pfdintextcomppro-light.ttf") format("truetype"), url("../fonts/pfdintextcomppro-light.svg#svgFontName") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 
 @font-face {
   font-family: 'News706BT-RomanC';
-  src: font-url("News706BT-RomanC.eot");
-  src: font-url("News706BT-RomanC.eot?#iefix") format("embedded-opentype"), font-url("News706BT-RomanC.woff") format("woff"), font-url("News706BT-RomanC.ttf") format("truetype"), font-url("News706BT-RomanC.svg#svgFontName") format("svg"); }
+  src: url("../fonts/News706BT-RomanC.eot#") format("eot"), url("../fonts/News706BT-RomanC.woff") format("woff"), url("../fonts/News706BT-RomanC.ttf") format("truetype"), url("../fonts/News706BT-RomanC.svg#svgFontName") format("svg"); }
 
 @font-face {
   font-family: 'News706BT-ItalicC';
-  src: font-url("News706BT-ItalicC.eot");
-  src: font-url("News706BT-ItalicC.eot?#iefix") format("embedded-opentype"), font-url("News706BT-ItalicC.woff") format("woff"), font-url("News706BT-ItalicC.ttf") format("truetype"), font-url("News706BT-ItalicC.svg#svgFontName") format("svg"); }
+  src: url("../fonts/News706BT-ItalicC.eot#") format("eot"), url("../fonts/News706BT-ItalicC.woff") format("woff"), url("../fonts/News706BT-ItalicC.ttf") format("truetype"), url("../fonts/News706BT-ItalicC.svg#svgFontName") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 
 @font-face {
   font-family: 'News706BT-BoldC';
-  src: font-url("News706BT-BoldC.eot");
-  src: font-url("News706BT-BoldC.eot?#iefix") format("embedded-opentype"), font-url("News706BT-BoldC.woff") format("woff"), font-url("News706BT-BoldC.ttf") format("truetype"), font-url("News706BT-BoldC.svg#svgFontName") format("svg"); }
+  src: url("../fonts/News706BT-BoldC.eot#") format("eot"), url("../fonts/News706BT-BoldC.woff") format("woff"), url("../fonts/News706BT-BoldC.ttf") format("truetype"), url("../fonts/News706BT-BoldC.svg#svgFontName") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 
 @font-face {
   font-family: 'Inconsolata';
-  src: font-url("inconsolata.eot");
-  src: font-url("inconsolata.eot?#iefix") format("embedded-opentype"), font-url("inconsolata.woff") format("woff"), font-url("inconsolata.ttf") format("truetype"), font-url("inconsolata.svg#svgFontName") format("svg"); }
+  src: url("../fonts/inconsolata.eot#") format("eot"), url("../fonts/inconsolata.woff") format("woff"), url("../fonts/inconsolata.ttf") format("truetype"), url("../fonts/inconsolata.svg#svgFontName") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 
 @font-face {
   font-family: 'Iconic';
-  src: font-url("iconic.eot");
-  src: font-url("iconic.eot?#iefix") format("embedded-opentype"), font-url("iconic.woff") format("woff"), font-url("iconic.ttf") format("truetype"), font-url("iconic.svg#svgFontName") format("svg"); }
+  src: url("../fonts/iconic.eot#") format("eot"), url("../fonts/iconic.woff") format("woff"), url("../fonts/iconic.ttf") format("truetype"), url("../fonts/iconic.svg#svgFontName") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -6646,10 +6652,6 @@ select {
   .navbar h1 {
     margin: 0;
     padding: 0; }
-  .navbar li.nav-item {
-    line-height: 53px; }
-    .navbar li.nav-item:first-child {
-      line-height: 60px; }
   .navbar a, .navbar a:visited, .navbar a:link, .navbar a:active {
     color: white; }
   .navbar img {
@@ -6663,6 +6665,10 @@ select {
   padding: 0; }
   .navbar-light .navbar-nav .nav-link:hover {
     color: red; }
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+  .navbar h1 {
+    font-size: 2rem; } }
 
 footer {
   padding: 20px 0;
