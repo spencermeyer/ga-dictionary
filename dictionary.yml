@@ -82,9 +82,21 @@
   definition:
   link:
 
+- word: MEAN
+  definition:  MongoDB, Angular, Express and NodeJS.  A JS stack.
+  link: http://mean.io/#!/
+
+- word: MongoDB
+  definition: MongoDB is an open source, document-oriented database designed with both scalability and developer agility in mind. (it is the M in MEAN stack)
+  link: https://www.mongodb.com/
+
 - word: Mocha
   definition: Mocha is a feature-rich JavaScript test framework running on Node.js and the browser, making asynchronous testing simple and fun.
   link: https://mochajs.org/
+
+- word: MySQL
+  definition: A relational database system.  It is open source and the world's second most widely used RDMS system.  Owned by Oracle (via MySQL AB, a Swedish company.)
+  link: https://www.mysql.com/
 
 - word: Node.js
   definition: Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. Node has allowed Javascript to be run server-side.
@@ -94,9 +106,9 @@
   definition:
   link:
 
-- word: P
-  definition:
-  link:
+- word: Proxy Server
+  definition:  In computer networks, a proxy server is a server (a computer system or an application) that acts as an intermediary for requests from clients seeking resources from other servers.
+  link: https://en.wikipedia.org/wiki/Proxy_server
 
 - word: Q
   definition:
@@ -105,6 +117,14 @@
 - word: Rails
   definition: A short name for Ruby on Rails.
   link: http://rubyonrails.org/
+
+- word: React JS
+  definition: A Javascript Framework for building user interfaces, as developed by Facebook. 
+  link: https://facebook.github.io/react/
+
+- word: Redis-Server
+  definition: Redis is an open source (BSD licensed), in-memory data structure store, used as database, cache and message broker.
+  link:  http://redis.io/
 
 - word: Ruby on Rails
   definition: Ruby on Rails, or simply Rails, is a web application framework written in Ruby under MIT License. Rails is a model–view–controller (MVC) framework, providing default structures for a database, a web service, and web pages.
@@ -126,6 +146,14 @@
   definition: Sass (Syntactically Awesome Style Sheets) is a scripting language that is interpreted into Cascading Style Sheets (CSS).
   link: http://sass-lang.com/
 
+- word: SSH
+  definition: Secure Shell, a cryptographic network protocol to allow remote secure access to a terminal.
+  link: http://www.ssh.com/
+
+- word: Swift
+  definition: Swift is a multi-paradigm, compiled programming language created for iOS, OS X, watchOS and tvOS development by Apple Inc.
+  link:  https://developer.apple.com/swift/
+
 - word: T
   definition:
   link:
@@ -138,9 +166,9 @@
   definition:
   link:
 
-- word: W
-  definition:
-  link:
+- word: Webpack
+  definition: Webpack takes modules with dependencies and generates static assets representing those modules i.e. it is a module bundler for big projects.
+  link: http://webpack.github.io/docs/
 
 - word: X
   definition:
